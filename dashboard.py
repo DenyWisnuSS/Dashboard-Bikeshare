@@ -57,30 +57,11 @@ def display_dashboard():
     # Title for Monthly Count of Bicycle Users
     st.subheader("Monthly Count of Bicycle Users (2011-2012)")
 
-    # Create Dict for decide number month to name month
-    month_labels = {
-    1: "Jan",
-    2: "Feb",
-    3: "Mar",
-    4: "Apr",
-    5: "May",
-    6: "Jun",
-    7: "Jul",
-    8: "Aug",
-    9: "Sep",
-    10: "Oct",
-    11: "Nov",
-    12: "Des"
-    }
-    
     # Set Figure
     plt.figure(figsize=(16,6))
 
     # Create lineplot for monthly count of bicycle users
-    sns.lineplot(x=filtered_hour.resample('M', on='dteday').sum().index.month, y="cnt", data=filtered_hour.resample('M', on='dteday').sum(), color='blue')
-
-    # Decide label X to name month
-    plt.xticks(range(1, 13), [month_labels[month] for month in range(1, 13)])
+    sns.lineplot(x="dteday", y="cnt", data=filtered_hour.resample('M', on='dteday').sum(), color='blue')
 
     # Assign labels and title
     plt.xlabel("")
