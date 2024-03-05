@@ -17,12 +17,17 @@ def display_dashboard():
     # Title for Bikeshare Dashboard (2011-2012)
     st.title("Bikeshare Dashboard (2011-2012)")
 
+def handle_date_filtering():
     # Sidebar for date filtering
     st.sidebar.subheader("Date Filtering")
     min_date = hour['dteday'].min()
     max_date = hour['dteday'].max()
     start_date = st.sidebar.date_input("Start Date", min_date, min_value=min_date, max_value=max_date)
     end_date = st.sidebar.date_input("End Date", max_date, min_value=min_date, max_value=max_date)
+
+    # Save filter dates to session state
+    st.session_state.start_date = start_date
+    st.session_state.end_date = end_date
 
     # Convert start_date and end_date to Timestamp objects
     start_date = Timestamp(start_date)
@@ -175,9 +180,14 @@ for option in icon_dict:
         if option == "About":
             display_about()
         elif option == "Dashboard":
+            handle_date_filtering()  # Apply date filtering
             display_dashboard()
 
 # If it's the user's first time accessing the app, display the dashboard automatically
-if st.session_state["first_time_user"]:
+if "first_time_user" not in st.session_state:
+    st.session_state.first_time_user = True
+
+if st.session_state.first_time_user:
+    handle_date_filtering()  # Apply date filtering
     display_dashboard()
-    st.session_state["first_time_user"] = False
+    st.session_state.first_time_user = False
