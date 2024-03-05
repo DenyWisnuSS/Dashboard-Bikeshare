@@ -73,7 +73,7 @@ def display_dashboard():
     # Show plot
     st.pyplot(fig)
 
-    # Title for Count of Cyclist by Season
+    # Title for Count of Bicycle Users by Season
     st.subheader("Count of Bicycle users by Season")
 
     # Count the number of users by season
@@ -86,11 +86,11 @@ def display_dashboard():
     # Determine the seasonal order
     season_order = season_users["season"].unique()
 
-    # Create Barplot for count of cyclist by season
+    # Create Barplot for count of Bicycle Users by season
     plt.figure(figsize=(10,6))
     ax = sns.barplot(x="season", y="cnt", data=season_users, order=season_order, palette=["lightblue" if x != season_users['cnt'].max() else "darkblue" for x in season_users['cnt']])
     plt.xlabel("")
-    plt.ylabel("Total Cyclist")
+    plt.ylabel("Total Bicycle Users")
     plt.title("Count of Bicycle Users by Season")
 
     # Format y-axis labels
@@ -102,7 +102,7 @@ def display_dashboard():
     # Show plot
     st.pyplot(fig)
 
-    # Title for Count of Cyclist by Weekday
+    # Title for Count of Bicycle Users by Weekday
     st.subheader("Count of Bicycle users by Weekday")
 
     # Count the number of users by weekday
@@ -115,11 +115,11 @@ def display_dashboard():
     # Determine the weekday order
     weekday_order = weekday_users["weekday"].unique()
 
-    # Create Barplot for count of cyclist by weekday
+    # Create Barplot for count of Bicycle Use by weekday
     plt.figure(figsize=(10,6))
     ax = sns.barplot(x="weekday", y="cnt", data=weekday_users, order=weekday_order, palette=["lightblue" if x != weekday_users['cnt'].max() else "darkblue" for x in weekday_users['cnt']])
     plt.xlabel("")
-    plt.ylabel("Total Cyclist")
+    plt.ylabel("Total Bicycle Users")
     plt.title("Count of Bicycle Users by Weekday")
 
     # Format y-axis labels
