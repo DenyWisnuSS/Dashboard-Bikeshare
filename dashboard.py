@@ -77,7 +77,7 @@ def display_dashboard():
     plt.figure(figsize=(16,6))
 
     # Create lineplot for monthly count of bicycle users
-    sns.lineplot(x="dteday", y="cnt", data=filtered_hour.resample('M', on='dteday').sum(), color='blue')
+    sns.lineplot(x=filtered_hour.resample('M', on='dteday').sum().index.month, y="cnt", data=filtered_hour.resample('M', on='dteday').sum(), color='blue')
 
     # Decide label X to name month
     plt.xticks(range(1, 13), [month_labels[month] for month in range(1, 13)])
