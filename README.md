@@ -1,2 +1,6 @@
-# Dashboard-Bikeshare
-Dashboard is Final Submission from course Dicoding " Belajar Analisis Data dengan Python " 
+# Dashboard-Bikeshare 2011-2012
+## Setup Environment
+pip install pandas numpy matplotlib seaborn streamlit babel
+
+## Run streamlit app
+streamlit run dashboard.py
