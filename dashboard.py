@@ -62,13 +62,13 @@ def display_dashboard():
     monthly_users.index = monthly_users.index.strftime('%b-%y')
     
     # Set Figure
-    plt.figure(figsize=(16,6))
+    plt.figure(figsize=(20,6))
 
     # Create lineplot for monthly count of bicycle users
     sns.lineplot(x=monthly_users.index, y="cnt", data=monthly_users, color='blue')
 
     # Assign labels and title
-    plt.xlabel("Month-Year")
+    plt.xlabel("")
     plt.ylabel("Total Bicycle Users")
     plt.title("Monthly count of bicycle users")
 
