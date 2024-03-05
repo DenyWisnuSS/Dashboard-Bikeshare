@@ -2,9 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-from babel.numbers import format_currency
 from pandas._libs.tslibs.timestamps import Timestamp
-import calendar
 sns.set(style='dark')
 
 # Load Data
@@ -68,6 +66,17 @@ def display_dashboard():
 
     # Create lineplot for monthly count of bicycle users
     sns.lineplot(x=monthly_users.index, y="cnt", data=monthly_users, color='blue')
+
+    # Assign labels and title
+    plt.xlabel("Month-Year")
+    plt.ylabel("Total Bicycle Users")
+    plt.title("Monthly count of bicycle users")
+
+    # Get the figure object
+    fig = plt.gcf()
+
+    # Show plot
+    st.pyplot(fig)
 
     # Title for Count of Bicycle Users by Season
     st.subheader("Count of Bicycle users by Season")
