@@ -4,7 +4,7 @@ import seaborn as sns
 import streamlit as st
 from babel.numbers import format_currency
 from pandas._libs.tslibs.timestamps import Timestamp
-import calendar
+sns.set(style='dark')
 
 # Load Data
 hour = pd.read_csv("hour.csv")
@@ -14,19 +14,6 @@ hour['dteday'] = pd.to_datetime(hour['dteday'])
 
 # Function to display dashboard page
 def display_dashboard():
-    # Set default values for filter dates
-    if "start_date" not in st.session_state:
-        st.session_state.start_date = hour['dteday'].min()
-    if "end_date" not in st.session_state:
-        st.session_state.end_date = hour['dteday'].max()
-
-    # Get filter dates from session state
-    start_date = st.session_state.start_date
-    end_date = st.session_state.end_date
-
-    # Filter data by date range
-    filtered_hour = hour[(hour['dteday'] >= start_date) & (hour['dteday'] <= end_date)]
-
     # Title for Bikeshare Dashboard (2011-2012)
     st.title("Bikeshare Dashboard (2011-2012)")
 
@@ -37,9 +24,12 @@ def display_dashboard():
     start_date = st.sidebar.date_input("Start Date", min_date, min_value=min_date, max_value=max_date)
     end_date = st.sidebar.date_input("End Date", max_date, min_value=min_date, max_value=max_date)
 
-    # Save filter dates to session state
-    st.session_state.start_date = start_date
-    st.session_state.end_date = end_date
+    # Convert start_date and end_date to Timestamp objects
+    start_date = Timestamp(start_date)
+    end_date = Timestamp(end_date)
+
+    # Filter data by date range
+    filtered_hour = hour[(hour['dteday'] >= start_date) & (hour['dteday'] <= end_date)]
 
     # Total rental information
     total_rentals = filtered_hour['cnt'].sum()
@@ -166,6 +156,10 @@ def display_about():
     3. Peak Rental Hour 
     """)
 
+# Check if the user has accessed the dashboard before
+if "first_time_user" not in st.session_state:
+    st.session_state["first_time_user"] = True
+
 # Sidebar navigation
 st.sidebar.subheader("Navigation")
 
@@ -184,9 +178,6 @@ for option in icon_dict:
             display_dashboard()
 
 # If it's the user's first time accessing the app, display the dashboard automatically
-if "first_time_user" not in st.session_state:
-    st.session_state.first_time_user = True
-
-if st.session_state.first_time_user:
+if st.session_state["first_time_user"]:
     display_dashboard()
-    st.session_state.first_time_user = False
+    st.session_state["first_time_user"] = False
