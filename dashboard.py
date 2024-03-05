@@ -4,7 +4,7 @@ import seaborn as sns
 import streamlit as st
 from babel.numbers import format_currency
 from pandas._libs.tslibs.timestamps import Timestamp
-import calender
+import calendar
 sns.set(style='dark')
 
 # Load Data
