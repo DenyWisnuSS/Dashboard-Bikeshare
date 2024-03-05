@@ -63,8 +63,8 @@ def display_dashboard():
     sns.lineplot(x="dteday", y="cnt", data=filtered_hour.resample('M', on='dteday').sum(), color='blue')
 
     # Assign labels and title
-    plt.xlabel("Date")
-    plt.ylabel("Total Cyclist")
+    plt.xlabel("")
+    plt.ylabel("Total Bicycle Users")
     plt.title("Monthly count of bicycle users")
 
     # Get the figure object
