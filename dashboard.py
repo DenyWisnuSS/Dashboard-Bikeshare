@@ -57,22 +57,17 @@ def display_dashboard():
     # Title for Monthly Count of Bicycle Users
     st.subheader("Monthly Count of Bicycle Users (2011-2012)")
 
+    # Resample data on a monthly basis and aggregate
+    monthly_users = filtered_hour.resample(rule='M', on='dteday').sum()
+
+    # Format the index to display month and year
+    monthly_users.index = monthly_users.index.strftime('%b-%y')
+    
     # Set Figure
     plt.figure(figsize=(16,6))
 
     # Create lineplot for monthly count of bicycle users
-    sns.lineplot(x="dteday", y="cnt", data=filtered_hour.resample('M', on='dteday').sum(), color='blue')
-
-    # Assign labels and title
-    plt.xlabel("")
-    plt.ylabel("Total Bicycle Users")
-    plt.title("Monthly count of bicycle users")
-
-    # Get the figure object
-    fig = plt.gcf()
-
-    # Show plot
-    st.pyplot(fig)
+    sns.lineplot(x=monthly_users.index, y="cnt", data=monthly_users, color='blue')
 
     # Title for Count of Bicycle Users by Season
     st.subheader("Count of Bicycle users by Season")
